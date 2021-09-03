@@ -1,0 +1,50 @@
+
+
+*Data Nodes*
+~~~~~~~~~~~~
+
+Data nodes hold the shards that contain the documents you have indexed. Data nodes handle data related operations like CRUD, search, and aggregations. These operations are I/O-, memory-, and CPU-intensive. It is important to monitor these resources and to add more data nodes if they are overloaded.
+
+
+The main benefit of having dedicated data nodes is the separation of the master and data roles. Data node VMs are attached to the backend pool of load balancers within the template, unless coordinating nodes are also deployed, in which case coordinating nodes will be attached instead.
+
+
+*Deployment Script*
+~~~~~~~~~~~~~~~~~~
+ "bash elasticsearch-install.sh -zdln 'elasticsearch' -v '${var.es_version}' -m ${var.jvm_heap_size} -A '${var.es_user_pass}' -R '${var.rmu_pass}' -K '${var.kibana_user_pass}' -S '${var.logstash_pass}' -F '${var.beats_password}' -M '${var.apm_password}' -B '${var.bootstrap_pass}' -Z ${var.data_node_count} -p '${var.host_prefix}' -a '${var.stg_acc_az_plugin}' -k '${var.key_stg_acc_az_plugin}' -E '${var.suffix_stg_acc_az_plugin}' -L '${var.add_plugins}' -C '${var.add_yaml_conf}' -D '${var.internal_lb_ip}' -H '${var.pks_archive_bundle_http}' -G '${var.pks_pass_bundle_http}' -V '${var.pks_ca_cert_bundle_http}' -J '${var.pks_ca_pass_bundle_http}' -T '${var.pks_ca_cert_bundle_transport}' -W '${var.pks_ca_pass_bundle_transport}' -N '${var.pks_pass_bundle_transport}' -O '${var.saml_url}' -P '${var.dns_name_saml}'"
+
+
+
+
+One can run Elasticsearch on their own hardware, or use hosted Elasticsearch Service on Elastic Cloud.
+
+*Description*
+~~~~~~~~~~~~~
+
+|=======================
+|*elasticsearch-install.sh -zdln 'elasticsearch'*  |Installs Elasticsearch with a preferred namespace along with additional plugins.    
+|*es_version*   |Version of the Elasticsearch to be installed. Eg. 7.11.1 etc.     
+|*Heap size*    |his is the amount of memory, in megabytes, to allocate on each Elasticsearch node for the JVM heap. Usually The heap size is the amount of RAM allocated to the Java Virtual Machine of an Elasticsearch node. As a general rule, you should set -Xms and -Xmx to the SAME value, which should be 50% of your total available RAM subject to a maximum of (approximately) 31GB.     
+|*es_user_pass*   |Represents the Elasticsearch Admin password. The authentication type for the Admin user can set to Either password or sshPublicKey. When authenticationType is password, it sets the OS level user's password.
+|*kibana_user_pass*   |This is usually a variable written as securityKibanaPassword which  is the security password for Kibana. This is the built-in kibana user. It should be a minimum of 12 characters, and must be greater than 6 characters.     
+|*logstash_pass*   |Variable represented as securityLogstashPassword which is the built in logstash_system user. It should be a minimum of 12 characters, and must be greater than 6 characters.     
+|*beats_password*  |This is the built-in beats_system user represented as securityBeatsPassword. Valid for Elasticsearch 6.3.0+ and should be a minimum of 12 characters, and must be greater than 6 characters.     
+|*apm_password*   |This is the built-in apm_system user represented as securityApmPasswor. Valid for Elasticsearch 6.5.0+ and should be a minimum of 12 characters, and must be greater than 6 characters.
+|*bootstrap_pass*  |The bootstrap password is used to seed the built-in users. Used only in 6.0.0+ and represented as securityBootstrapPassword. Security password for 6.x bootstrap.password key that is added to the keystore. If no value is supplied, a 13 character password will be generated using the ARM template uniqueString() function.    
+|*data_node_count*    |It is the Data node count of VM. Allows number of data nodes one wish to deploy. Must be greater than 0.     
+|*host_prefix*    |This represents a prefix to use for hostnames when naming virtual machines in the cluster. Hostnames are used for resolution of master nodes on the network, so if deploying a cluster into an existing virtual network containing an existing Elasticsearch cluster, be sure to set this to a unique prefix, to differentiate the hostnames of this cluster from an existing cluster. Can be up to 5 characters in length, must begin with an alphanumeric character and can contain alphanumeric and hyphen characters.    
+|*stg_acc_az_plugin*   |This provides option either Yes or No to install the Azure Repository plugin for snapshot/restore. When set to Yes, at least azureCloudStorageAccountName must be specified to configure the plugin correctly. This is the name of an existing storage account to use for snapshots with Azure Repository plugin. It must be a valid Azure Storage Account name.
+|*add_plugins*    |These are additional Elasticsearch plugins to install. Each plugin must be separated by a semicolon. e.g. analysis-icu;mapper-attachments
+add_yaml_conf – This is additional configuration for Elasticsearch yaml configuration file. Each line must be separated by a newline character \n e.g. "action.auto_create_index: +.*\nindices.queries.cache.size: 5%".
+internal_lb_ip - The internal load balancer SKU. Can be Basic or Standard with IP address.     
+|*pks_archive_bundle_http*   |A Base-64 encoded form of the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.    
+|*pks_pass_bundle_http*    |The password for the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. Optional as the archive may not be protected with a password.     
+|*pks_ca_cert_bundle_transport*    |A Base-64 encoded form of a PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to use to generate certificates on each Elasticsearch node, to secure communication for Transport layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+|*pks_ca_pass_bundle_transport*    |The password for the PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to secure communication for Transport layer to Elasticsearch. Optional as the archive may not be be protected with a password. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.     
+|=======================
+
+
+
+
+
+
