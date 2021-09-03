@@ -26,9 +26,9 @@ One can run Elasticsearch on their own hardware, or use hosted Elasticsearch Ser
 |*-d*  |This represents that cluster uses dedicated masters.
 |*-l*  |This installs X-Pack plugin (<6.3.0) or applies trial license for Platinum features (6.3.0+)
 |*-n*  |A preferred namespace along with additional plugins for a Data Node.
-|*-v*   |Version of the Elasticsearch to be installed. Eg. 7.11.1 etc.     
+|*-v*  |Version of the Elasticsearch to be installed. Eg. 7.11.1 etc.     
 |*-m*  |This is the amount of memory, in megabytes, to allocate on each Elasticsearch node for the JVM heap. Usually The heap size is the amount of RAM allocated to the Java Virtual Machine of an Elasticsearch node. As a general rule, you should set -Xms and -Xmx to the SAME value, which should be 50% of your total available RAM subject to a maximum of (approximately) 31GB.     
-|*-A* |Represents the Elasticsearch Admin password. The authentication type for the Admin user can set to Either password or sshPublicKey. When authenticationType is password, it sets the OS level user's password.
+|*-A*|Represents the Elasticsearch Admin password. The authentication type for the Admin user can set to Either password or sshPublicKey. When authenticationType is password, it sets the OS level user's password.
 |*-K* |This is usually a variable written as securityKibanaPassword which  is the security password for Kibana. This is the built-in kibana user. It should be a minimum of 12 characters, and must be greater than 6 characters.     
 |*-S* |Variable represented as securityLogstashPassword which is the built in logstash_system user. It should be a minimum of 12 characters, and must be greater than 6 characters.     
 |*-F* |This is the built-in beats_system user represented as securityBeatsPassword. Valid for Elasticsearch 6.3.0+ and should be a minimum of 12 characters, and must be greater than 6 characters.     
