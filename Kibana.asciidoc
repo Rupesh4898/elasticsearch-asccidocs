@@ -11,16 +11,16 @@ It provides real-time histograms, line graphs, pie charts, and maps. The version
 
 
 
-*Deployment Script*
-~~~~~~~~~~~~~~~~~~
+== *Deployment Script*
+
 
  "bash kibana-install.sh -ln 'elasticsearch' -v '${var.kibana_version}' -u '${var.es_url}' -S '${var.kibana_user_pass}' -C '${var.kibana_cert}' -K '${var.kibana_cert_key}' -P '${var.kibana_cert_key_pass}' -Y '${var.add_yaml_conf}' -H '${var.pks_archive_bundle_http}' -G '${var.pks_pass_bundle_http}' -V '${var.pks_ca_cert_bundle_http}' -J '${var.pks_ca_pass_bundle_http}' -U '${var.dns_name_saml_kibana}'"
 
 
 
 
-*Description*
-~~~~~~~~~~~~~
+== *Description*
+
 
 |===
 

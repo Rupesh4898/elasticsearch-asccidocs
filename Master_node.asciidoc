@@ -11,15 +11,15 @@ A small or lightly-loaded cluster may operate well if its master-eligible nodes 
 
 
 
-*Deployment Script*
-~~~~~~~~~~~~~~~~~~
+== *Deployment Script*
+
  "bash elasticsearch-install.sh -xdln 'elasticsearch' -v '${var.es_version}' -m ${var.jvm_heap_size} -A '${var.es_user_pass}' -R '${var.rmu_pass}' -K '${var.kibana_user_pass}' -S '${var.logstash_pass}' -F '${var.beats_password}' -M '${var.apm_password}' -B '${var.bootstrap_pass}' -Z ${var.data_node_count} -p '${var.host_prefix}' -a '${var.stg_acc_az_plugin}' -k '${var.key_stg_acc_az_plugin}' -E '${var.suffix_stg_acc_az_plugin}' -L '${var.add_plugins}' -C '${var.add_yaml_conf}' -D '${var.internal_lb_ip}' -H '${var.pks_archive_bundle_http}' -G '${var.pks_pass_bundle_http}' -V '${var.pks_ca_cert_bundle_http}' -J '${var.pks_ca_pass_bundle_http}' -T '${var.pks_ca_cert_bundle_transport}' -W '${var.pks_ca_pass_bundle_transport}' -N '${var.pks_pass_bundle_transport}' -O '${var.saml_url}' -P '${var.dns_name_saml}'"
 
 
 
 
-*Description*
-~~~~~~~~~~~~~
+== *Description*
+
 
 |=======================
 |*elasticsearch-install.sh -zdln 'elasticsearch'*  |Installs Elasticsearch with a preferred namespace along with additional plugins.    
