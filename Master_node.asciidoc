@@ -1,23 +1,22 @@
 
-= *Data Nodes*
-~~~~~~~~~~~~
 
-Data nodes hold the shards that contain the documents you have indexed. Data nodes handle data related operations like CRUD, search, and aggregations. These operations are I/O-, memory-, and CPU-intensive. It is important to monitor these resources and to add more data nodes if they are overloaded.
+= *Master Node*
+~~~~~~~~~~~~~~
 
+The master node is responsible for lightweight cluster-wide actions such as creating or deleting an index, tracking which nodes are part of the cluster, and deciding which shards to allocate to which nodes. It is important for cluster health to have a stable master node.
 
-The main benefit of having dedicated data nodes is the separation of the master and data roles. Data node VMs are attached to the backend pool of load balancers within the template, unless coordinating nodes are also deployed, in which case coordinating nodes will be attached instead.
+It is important for the health of the cluster that the elected master node has the resources it needs to fulfill its responsibilities. If the elected master node is overloaded with other tasks, then the cluster will not operate well. The most reliable way to avoid overloading the master with other tasks is to configure all the master-eligible nodes to be dedicated master-eligible nodes which only have the master role, allowing them to focus on managing the cluster. 
 
-In a multi-tier deployment architecture, you use specialized data roles to assign data nodes to specific tiers: data_content,data_hot, data_warm, data_cold, or data_frozen. A node can belong to multiple tiers, but a node that has one of the specialized data roles cannot have the generic data role.
+A small or lightly-loaded cluster may operate well if its master-eligible nodes have other roles and responsibilities, but once your cluster comprises more than a handful of nodes it usually makes sense to use dedicated master-eligible nodes.
+
 
 
 *Deployment Script*
 ~~~~~~~~~~~~~~~~~~
- "bash elasticsearch-install.sh -zdln 'elasticsearch' -v '${var.es_version}' -m ${var.jvm_heap_size} -A '${var.es_user_pass}' -R '${var.rmu_pass}' -K '${var.kibana_user_pass}' -S '${var.logstash_pass}' -F '${var.beats_password}' -M '${var.apm_password}' -B '${var.bootstrap_pass}' -Z ${var.data_node_count} -p '${var.host_prefix}' -a '${var.stg_acc_az_plugin}' -k '${var.key_stg_acc_az_plugin}' -E '${var.suffix_stg_acc_az_plugin}' -L '${var.add_plugins}' -C '${var.add_yaml_conf}' -D '${var.internal_lb_ip}' -H '${var.pks_archive_bundle_http}' -G '${var.pks_pass_bundle_http}' -V '${var.pks_ca_cert_bundle_http}' -J '${var.pks_ca_pass_bundle_http}' -T '${var.pks_ca_cert_bundle_transport}' -W '${var.pks_ca_pass_bundle_transport}' -N '${var.pks_pass_bundle_transport}' -O '${var.saml_url}' -P '${var.dns_name_saml}'"
+ "bash elasticsearch-install.sh -xdln 'elasticsearch' -v '${var.es_version}' -m ${var.jvm_heap_size} -A '${var.es_user_pass}' -R '${var.rmu_pass}' -K '${var.kibana_user_pass}' -S '${var.logstash_pass}' -F '${var.beats_password}' -M '${var.apm_password}' -B '${var.bootstrap_pass}' -Z ${var.data_node_count} -p '${var.host_prefix}' -a '${var.stg_acc_az_plugin}' -k '${var.key_stg_acc_az_plugin}' -E '${var.suffix_stg_acc_az_plugin}' -L '${var.add_plugins}' -C '${var.add_yaml_conf}' -D '${var.internal_lb_ip}' -H '${var.pks_archive_bundle_http}' -G '${var.pks_pass_bundle_http}' -V '${var.pks_ca_cert_bundle_http}' -J '${var.pks_ca_pass_bundle_http}' -T '${var.pks_ca_cert_bundle_transport}' -W '${var.pks_ca_pass_bundle_transport}' -N '${var.pks_pass_bundle_transport}' -O '${var.saml_url}' -P '${var.dns_name_saml}'"
 
 
 
-
-One can run Elasticsearch on their own hardware, or use hosted Elasticsearch Service on Elastic Cloud.
 
 *Description*
 ~~~~~~~~~~~~~

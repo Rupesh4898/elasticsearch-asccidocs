@@ -1,0 +1,48 @@
+
+
+
+= *Kibana*
+~~~~~~~~~
+
+Kibana is a free and open frontend application that sits on top of the Elastic Stack, providing search and data visualization capabilities for data indexed in Elasticsearch. Commonly known as the charting tool for the Elastic Stack (previously referred to as the ELK Stack after Elasticsearch, Logstash, and Kibana), Kibana also acts as the user interface for monitoring, managing, and securing an Elastic Stack cluster — as well as the centralized hub for built-in solutions developed on the Elastic Stack.
+
+It provides real-time histograms, line graphs, pie charts, and maps. The version of Kibana deployed is always the same as the version of Elasticsearch, ensuring compatibility between the products.
+
+
+
+
+*Deployment Script*
+~~~~~~~~~~~~~~~~~~
+
+ "bash kibana-install.sh -ln 'elasticsearch' -v '${var.kibana_version}' -u '${var.es_url}' -S '${var.kibana_user_pass}' -C '${var.kibana_cert}' -K '${var.kibana_cert_key}' -P '${var.kibana_cert_key_pass}' -Y '${var.add_yaml_conf}' -H '${var.pks_archive_bundle_http}' -G '${var.pks_pass_bundle_http}' -V '${var.pks_ca_cert_bundle_http}' -J '${var.pks_ca_pass_bundle_http}' -U '${var.dns_name_saml_kibana}'"
+
+
+
+
+*Description*
+~~~~~~~~~~~~~
+
+|===
+
+|*kibana-install.sh -ln 'elasticsearch'*  |This installs Kibana on top of the given Elasticsearch.
+
+|*kibana_version* – |Defines the version of Kibana to be installed. Usually, the version of Kibana deployed is always the same as the version of Elasticsearch.
+
+|*es_url*  |The base URI where artifacts required by this template are located, including a trailing '/'. Use to target a specific branch or release tag.
+
+|*kibana_user_pass*  |This is usually a variable written as securityKibanaPassword which  is the security password for Kibana. This is the built-in kibana user. It should be a minimum of 12 characters, and must be greater than 6 characters.
+
+|*kibana_cert*  |A Base-64 encoded form of the certificate (.crt) in PEM format to secure HTTPS communication between the browser and Kibana.
+
+|*kibana_cert_key*  |A Base-64 encoded form of the private key (.key) in PEM format to secure HTTPS communication between the browser and Kibana.
+kibana_cert_key_pass - The passphrase to decrypt the private key. Optional as the key may not be encrypted.
+
+|*add_yaml_conf*  |This is additional configuration for Elasticsearch yaml configuration file. Each line must be separated by a newline character \n e.g. "action.auto_create_index: +.*\nindices.queries.cache.size: 5%".
+
+|*pks_archive_bundle_http*  |A Base-64 encoded form of the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+
+|*pks_pass_bundle_http*  |The password for the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. Optional as the archive may not be protected with a password.
+
+|*pks_ca_cert_bundle_http*  |A Base-64 encoded form of a PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to use to generate certificates on each Elasticsearch node, to secure communication for Transport layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+
+|*pks_ca_pass_bundle_http*  |The password for the PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to secure communication for Transport layer to Elasticsearch. Optional as the archive may not be be protected with a password. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
