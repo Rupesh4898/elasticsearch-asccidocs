@@ -24,25 +24,27 @@ It provides real-time histograms, line graphs, pie charts, and maps. The version
 
 |===
 
-|*kibana-install.sh -ln 'elasticsearch'*  |This installs Kibana on top of the given Elasticsearch.
+|*-l*  |This installs X-Pack plugin (<6.3.0) or apply trial license for Platinum features (6.3.0+).
+|*-n*  |This represents elasticsearch cluster name.
 
-|*kibana_version* – |Defines the version of Kibana to be installed. Usually, the version of Kibana deployed is always the same as the version of Elasticsearch.
+|*-v*  |Defines the version of Kibana to be installed. Usually, the version of Kibana deployed is always the same as the version of Elasticsearch.
 
-|*es_url*  |The base URI where artifacts required by this template are located, including a trailing '/'. Use to target a specific branch or release tag.
+|*-u*  |The base URI where artifacts required by this template are located, including a trailing '/'. Use to target a specific branch or release tag.
 
-|*kibana_user_pass*  |This is usually a variable written as securityKibanaPassword which  is the security password for Kibana. This is the built-in kibana user. It should be a minimum of 12 characters, and must be greater than 6 characters.
+|*-S*  |This is usually a variable written as securityKibanaPassword which  is the security password for Kibana. This is the built-in kibana user. It should be a minimum of 12 characters, and must be greater than 6 characters.
 
-|*kibana_cert*  |A Base-64 encoded form of the certificate (.crt) in PEM format to secure HTTPS communication between the browser and Kibana.
+|*-C*  |A Base-64 encoded form of the certificate (.crt) in PEM format to secure HTTPS communication between the browser and Kibana.
 
-|*kibana_cert_key*  |A Base-64 encoded form of the private key (.key) in PEM format to secure HTTPS communication between the browser and Kibana.
+|*-K*  |A Base-64 encoded form of the private key (.key) in PEM format to secure HTTPS communication between the browser and Kibana.
 kibana_cert_key_pass - The passphrase to decrypt the private key. Optional as the key may not be encrypted.
 
-|*add_yaml_conf*  |This is additional configuration for Elasticsearch yaml configuration file. Each line must be separated by a newline character \n e.g. "action.auto_create_index: +.*\nindices.queries.cache.size: 5%".
+|*-Y*  |This is additional configuration for Elasticsearch yaml configuration file. Each line must be separated by a newline character \n e.g. "action.auto_create_index: +.*\nindices.queries.cache.size: 5%".
 
-|*pks_archive_bundle_http*  |A Base-64 encoded form of the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+|*-H*  |A Base-64 encoded form of the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
 
-|*pks_pass_bundle_http*  |The password for the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. Optional as the archive may not be protected with a password.
+|*-G*  |The password for the PKCS#12 archive (.p12/.pfx) containing the certificate and key to secure communication for HTTP layer to Elasticsearch. Optional as the archive may not be protected with a password.
 
-|*pks_ca_cert_bundle_http*  |A Base-64 encoded form of a PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to use to generate certificates on each Elasticsearch node, to secure communication for Transport layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+|*-V*  |A Base-64 encoded form of a PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to use to generate certificates on each Elasticsearch node, to secure communication for Transport layer to Elasticsearch. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
 
-|*pks_ca_pass_bundle_http*  |The password for the PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to secure communication for Transport layer to Elasticsearch. Optional as the archive may not be be protected with a password. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+|*-J*  |The password for the PKCS#12 archive (.p12/.pfx) containing the Certificate Authority (CA) certificate and key to secure communication for Transport layer to Elasticsearch. Optional as the archive may not be be protected with a password. xpackPlugins must be Yes, or esVersion must be 6.8.0 or above (and less than 7.0.0) or 7.1.0 and above.
+|*-U*  |Public domain name (and optional port) for this instance of Kibana to configure SAML Single-Sign-On.
