@@ -25,7 +25,7 @@ A small or lightly-loaded cluster may operate well if its master-eligible nodes 
 |*-x*  |This configures as a dedicated master node.
 |*-d*  |This represents that cluster uses dedicated masters.
 |*-l*  |This installs X-Pack plugin (<6.3.0) or applies trial license for Platinum features (6.3.0+)
-|*-n*  |A preferred namespace along with additional plugins for a Master Node.    
+|*-n*  |A preferred namespace along with additional plugins for a Master Node. 
 |*-v*   |Version of the Elasticsearch to be installed. Eg. 7.11.1 etc.     
 |*-m*    |This is the amount of memory, in megabytes, to allocate on each Elasticsearch node for the JVM heap. Usually The heap size is the amount of RAM allocated to the Java Virtual Machine of an Elasticsearch node. As a general rule, you should set -Xms and -Xmx to the SAME value, which should be 50% of your total available RAM subject to a maximum of (approximately) 31GB.     
 |*-A*   |Represents the Elasticsearch Admin password. The authentication type for the Admin user can set to Either password or sshPublicKey. When authenticationType is password, it sets the OS level user's password.
